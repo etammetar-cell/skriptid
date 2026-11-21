@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# Salvestame käsurea argumendid muutujatesse
+fail="$1"
+oodatud_oigused="$2"
+
+# Kontrollime, kas mõlemad argumendid on antud
+if [ -z "$fail" ] || [ -z "$oodatud_oigused" ]; then
+    echo "Kasutus: oigused <failitee> <oigused>"
+    exit 1
+fi
+
+# Kontrollime, kas etteantud tee on ikka tavaline fail
+if [ ! -f "$fail" ]; then
+    echo "Hoiatus: $fail pole fail!"
+    exit 1
+fi
+
+# Loeme faili tegelikud õigused numbrilisel kujul
+tegelikud_oigused=$(stat -c %a "$fail")
+
+# Võrdleme tegelikke õigusi oodatud õigustega
+if [ "$tegelikud_oigused" = "$oodatud_oigused" ]; then
+    echo "Fail $fail on olemas ja õigustega korrektselt määratud"
+else
+    echo "Hoiatus: faili $fail õigused on $tegelikud_oigused, peaksid olema $oodatud_oigused!"
+fi

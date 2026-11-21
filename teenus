@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Salvestame esimese käsurea argumendi muutujasse
+teenus_nimi="$1"
+
+# Kontrollime, kas kasutaja sisestas teenuse nime
+if [ -z "$teenus_nimi" ]; then
+    echo "Kasutus: teenus <teenuse_nimi>"
+    exit 1
+fi
+
+# Kontrollime systemctl abil, kas teenus on aktiivne
+if systemctl is-active --quiet "$teenus_nimi"; then
+    echo "$teenus_nimi on aktiivne ja töötab."
+else
+    echo "Hoiatus: $teenus_nimi ei ole aktiivne!"
+fi
