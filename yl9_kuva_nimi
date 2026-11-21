@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo "Nimi: Erik Tammetar"
+echo "Kursus: ITS25"
